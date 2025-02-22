@@ -306,7 +306,7 @@
                                                 <td>{{ $pricing->validity }}</td>
                                                 <td>{{ $pricing->treatment ?? 'N/A' }}</td>
                                                 <td>{{ $pricing->certified ?? 'N/A' }}</td>
-                                                <td>{{ $pricing->rating ?? 'N/A' }} Star</td>
+                                                <td>{{ $posting->certified != 'BAP Certified' ? 'Na' : $posting->rating . ' Star BAP' }}</td>
                                                 <td>{{ $pricing->description }}</td>
                                                 <td>{{ $pricing->company_name }}</td>
                                             </tr>

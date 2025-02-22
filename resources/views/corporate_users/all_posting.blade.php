@@ -40,7 +40,7 @@
             <td style="font-weight: bold; ">{{ $posting->price }} {{ $posting->currency }}</td>
             <td>{{ $posting->validity }}</td>
             <td>{{ $posting->certified }}</td>
-            <td>{{ $posting->rating }} Star</td>
+            <td>{{ $posting->certified != 'BAP Certified' ? 'Na' : $posting->rating . ' Star BAP' }}</td>
             <td>{{ $posting->description }}</td>
             <td>{{ $posting->company_name }}</td>
             <td>{{ $posting->treatment }}</td>
@@ -112,7 +112,10 @@ jQuery(document).ready(function($) {
                 previous: "Previous"
             }
         },
-        order: [[5, 'desc']]
+        "columnDefs": [
+            { "orderable": false, "targets": [5] } // Disable sorting for the "Description" column (6th column, index 5)
+        ],
+        order: [] // Disable default sorting on any column
     });
     $('.edit-status').click(function() {
         var buttonText = $(this).text();

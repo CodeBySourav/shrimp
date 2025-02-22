@@ -22,8 +22,8 @@
                                 <th>Quantity Range</th>
                                 <th>Price</th>
                                 <th>Validity</th>
-                                <th>Description</th>
-                                <th>Created At</th>
+                                <th>Certified</th>
+                                <th>Description</th> 
                             </tr>
                         </thead>
                         <tbody>
@@ -35,8 +35,8 @@
                                     ${{ number_format($submission->price, 2) }}
                                 </td>
                                 <td>{{ $submission->validity }}</td>
-                                <td>{{ $submission->description }}</td>
-                                <td>{{ $submission->created_at->format('Y-m-d H:i:s') }}</td>
+                                <td>{{ $submission->certified }}</td>
+                                <td>{{ $submission->description }}</td> 
                             </tr>
                             @endforeach
                         </tbody>
@@ -70,7 +70,10 @@ jQuery(document).ready(function($) {
                 previous: "Previous"
             }
         },
-        order: [[5, 'desc']]
+        "columnDefs": [
+            { "orderable": false, "targets": [5] } // Disable sorting for the "Description" column (6th column, index 5)
+        ],
+        order: [] // Disable default sorting on any column
     });
     $('.edit-status').click(function() {
         var buttonText = $(this).text();

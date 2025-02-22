@@ -397,7 +397,8 @@ document.addEventListener("DOMContentLoaded", function() {
                             <div class="text-center">
                                 <label class="vendor-form-label">Count</label>
 
-                                @if($product->name === 'Peeled and un-deveined (PUD) Tail OFF' || $product->name === 'Peeled and un-deveined (PUD) Tail ON')
+                                @if($product->name === 'Peeled and un-deveined (PUD) Tail OFF' || $product->name ===
+                                'Peeled and un-deveined (PUD) Tail ON')
                                 <div class="quantity-checkbox-container">
                                     <div class="checkbox-column">
                                         @foreach(['80 - 100', '91 - 110', '150 - 200', '200 - 300'] as $index => $range)
@@ -442,23 +443,38 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
                                 <div class="star-rating-container">
-                                <div class="certification-container">
-                                    <h4 id="certification-text">BAP Certified</h4>
-                                    <input type="hidden" name="certified" id="certified-value" value="BAP Certified">
+                                    <div class="certification-container">
+                                        <h4 id="certification-text">BAP Certified</h4>
+                                        <input type="hidden" name="certified" id="certified-value"
+                                            value="BAP Certified">
 
-                                </div>
-
-                                    <div class="stars">
-                                        <i class="fa fa-star star" data-value="1"></i>
-                                        <i class="fa fa-star star" data-value="2"></i>
-                                        <i class="fa fa-star star" data-value="3"></i>
-                                        <i class="fa fa-star star" data-value="4"></i>
-                                        <span class="separator"></span> <!-- Spacer between stars and reset icon -->
-                                        <i class="fa fa-ban star reset-rating" data-value="0" title="No Rating"></i>
-                                        <!-- Reset Star -->
                                     </div>
-                                    <input type="hidden" name="rating" id="selected-rating" value="0">
-                                    <p id="rating-text" class="rating-message"></p>
+
+                                    <div class="stars-work">
+                                        <div class="stars">
+                                            <i class="fa fa-star star" data-value="1"></i>
+                                            <i class="fa fa-star star" data-value="2"></i>
+                                            <i class="fa fa-star star" data-value="3"></i>
+                                            <i class="fa fa-star star" data-value="4"></i>
+                                            <span class="separator"></span> <!-- Spacer between stars and reset icon -->
+                                            <i class="fa fa-ban star reset-rating" data-value="0" title="No Rating"></i>
+                                            <!-- Reset Star -->
+                                        </div>
+                                        <input type="hidden" name="rating" id="selected-rating" value="0">
+                                        <p id="rating-text" class="rating-message"></p>
+                                    </div>
+                                    
+                                    <div class="radio-work">
+                                        <label>
+                                            <input type="radio" name="certified" value="ASC Certified" >
+                                            ASC Certified
+                                        </label>
+                                        <label style="color: red; margin-left: 15px;">
+                                            <input type="radio" name="certified" value="NON-ASC">
+                                            NON-ASC
+                                        </label>
+                                    </div>
+
                                 </div>
 
                                 <style>
@@ -547,6 +563,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const dynamicFieldsContainer = document.getElementById('dynamic-fields');
     const certificationText = document.getElementById('certification-text');
     const certifiedInput = document.getElementById('certified-value'); // Hidden Input for DB
+    const radioWork = document.querySelector(".radio-work");
+    const starsWork = document.querySelector(".stars-work");
 
     quantityCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {
@@ -618,12 +636,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateCertificationDisplay(currency) {
         if (currency === "$USD") {
             certificationText.innerText = "BAP Certified";
-            certifiedInput.value = "BAP Certified"; // Store value in hidden input
+            certifiedInput.value = "BAP Certified"; 
+            radioWork.style.display = "none"; // Hide radio buttons
+            starsWork.style.display = "block"; // Show star rating
         } else if (currency === "$CAD") {
             certificationText.innerText = "ASC Certified";
-            certifiedInput.value = "ASC Certified"; // Store value in hidden input
+            certifiedInput.value = "ASC Certified"; 
+            radioWork.style.display = "block"; // Show radio buttons
+            starsWork.style.display = "none"; // Hide star rating
         }
     }
+    radioWork.style.display = "none";
 });
 </script>
 
